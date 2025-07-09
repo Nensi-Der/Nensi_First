@@ -1,3 +1,4 @@
+--krijo tabelen
 CREATE TABLE kursi
 (
 id SERIAL PRIMARY KEY,
@@ -6,6 +7,7 @@ id SERIAL PRIMARY KEY,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+--mbush tabelen me te dhena
 INSERT INTO kursi (emri_kursit, kohezgjatja)
 VALUES 
   ('Programim Web', '3 muaj'),
@@ -18,6 +20,7 @@ VALUES
   ('Analiza e të Dhënave', '3 muaj'),
   ('Dizajn Grafik', '2 muaj'),
   ('Menaxhimi i Projekteve IT', '2 muaj');
+--shto nje kolone ne tabele per gjuhen e programimit
   ALTER TABLE kursi
 ADD COLUMN programming_language VARCHAR(50);
 UPDATE kursi
@@ -61,6 +64,7 @@ SET programming_language = 'N/A'
 WHERE emri_kursit = 'Menaxhimi i Projekteve IT';
 DELETE FROM kursi
 WHERE emri_kursit = 'Bazat e SQL';
+--krijo tabele me emrin student
 CREATE TABLE student (
     id SERIAL PRIMARY KEY,
     emri VARCHAR(100) NOT NULL,
@@ -74,6 +78,7 @@ CREATE TABLE student (
       REFERENCES internship(id)
       ON DELETE SET NULL
 );
+--mbush tabelen student
 INSERT INTO student (emri, email, birth_date, phone_number, pike, internship_id)
 VALUES
   ('A', 'a@gmail.com', '1998-05-12', '062', 88.5, 1),
@@ -86,14 +91,15 @@ VALUES
   ('H', 'h@gmail.com', '1997-06-17', '069', 80.0, 2),
   ('I', 'i@gmail.com', '1998-09-29', '061', 91.0, 1),
   ('J', 'j@gmail.com', '1999-12-11', '060', 78.5, NULL);
+--alterno tabelen me emrin student
   ALTER TABLE student
-RENAME COLUMN pike TO nota;
-SELECT * FROM kursi;
-SELECT * FROM student
-WHERE emri LIKE 'A%';
-SELECT * FROM kursi
+RENAME COLUMN pike TO nota; --riemerto nje kolone
+SELECT * FROM kursi; --beji display tabeles kursi
+SELECT * FROM student 
+WHERE emri LIKE 'A%'; --beji display reshtave ne tabelen student ku emri fillon me A
+SELECT * FROM kursi --bej display studenteve nga 2023-2025
 WHERE created_at >= '2023-01-01' 
   AND created_at < '2026-01-01';
-  SELECT *
+  SELECT * --beji display studenteve mbi 25 vjec
 FROM student
 WHERE birth_date <= (CURRENT_DATE - INTERVAL '25 years');
